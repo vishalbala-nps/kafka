@@ -1,0 +1,23 @@
+version: 0.1
+component: build
+timeoutInSeconds: 20000
+runAs: root
+shell: bash
+env:
+  exportedVariables:
+   - version
+steps:
+
+  - type: Command
+    name: "kafka Build"
+    command: |
+      version=2
+      chmod 777 ./gradlew
+      ./gradlew jar
+      date >> kafka.txt
+      
+outputArtifacts:
+
+  - name: kafka
+    type: BINARY
+    location: kafka.txt
